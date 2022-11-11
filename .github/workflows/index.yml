@@ -30,7 +30,7 @@ jobs:
 
       - name: Deploy
         # https://github.com/egorvelv/best-soviet-films
-        uses: egorvelv/best-soviet-films@
+        uses: git@github.com:egorvelv/best-soviet-films.git
         with:
           branch: gh-pages
           folder: out
