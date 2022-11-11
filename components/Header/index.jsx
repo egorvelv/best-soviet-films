@@ -5,18 +5,18 @@ export const Header = () => {
     return (<div>
         <PageHeader
             className={'PageHeader'}
-            title={'1hCook'}
-            subTitle={'Повара на районе'}
+            title={'Советские фильмы'}
+            subTitle={'Доступный и понятный сборник'}
             extra={[
                 <Link href={'/'} key={1}>
-                    Все повара
+                    Все фильмы
                 </Link>,
-                <Button type={'link'} key={2}>
-                    Я повар
-                </Button>,
-                <Button type={'primary'} key={3}>
-                    Войти
-                </Button>
+                <Link href={'https://www.donationalerts.com/r/egorvelv'} key={1}>
+                    <Button type={'primary'} key={2}>
+                        Поддержать автора
+                    </Button>
+                </Link>,
+                
             ]}>
         </PageHeader>
     </div>)

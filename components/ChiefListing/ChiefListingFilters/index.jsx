@@ -1,100 +1,88 @@
-import {Col, Row, Select, Slider} from "antd";
+import {Col, Row, Select} from "antd";
 import {useState} from "react";
 const { Option } = Select;
 
 export const ChiefListingFilters = probs => {
     const {
-        positions,
-        dishes,
-        cuisines,
+        producers,
+        genres,
+        screenwriters,
         onFilterChange
     } = probs;
 
     const [selectedFilters, changeSelectedFilters] = useState({
             filtersOn: false,
-            position: null,
-            dish: null,
-            cuisine: null,
-            experiense: null
+            producer: null,
+            genre: null,
+            screenwriter: null,
     });
 
-    const handlePositionChange = selectedPosition => {
-        updateSelectedFilters('position', selectedPosition);
+    const handleProducerChange = selectedProducer => {
+        updateSelectedFilters('producer', selectedProducer);
     }
 
-    const handleDishChange = selectedDish => {
-        updateSelectedFilters('dish', selectedDish);
+    const handleGenreChange = selectedGenre => {
+        updateSelectedFilters('genre', selectedGenre);
     }
 
-    const handleCuisineChange = selectedCuisine => {
-        updateSelectedFilters('cuisine', selectedCuisine);
+    const handlescreenwriterChange = selectedscreenwriter => {
+        updateSelectedFilters('screenwriter', selectedscreenwriter);
     }
 
-    const handleSliderChange = selectedExperiense => {
-        updateSelectedFilters('experiense', selectedExperiense);
-    }
-
-    const FilterChiefByWorkTime = selectedTime => {
-        console.log(selectedTime)
-    }
+    let producersFinal = Array.from(new Set(producers));
+    let screenwritersFinal = Array.from(new Set(screenwriters));
+    let genresFinal = Array.from(new Set(genres));
 
     return (
         <>
-            <Row>
-                <Col span={8}>
+            <Row justify={'space-between'}>
+                <Col span={6} className={'filter_breadcrumb'}>
                     <Select style={{width: 240}}
-                            onChange={handlePositionChange}
+                            onChange={handleProducerChange}
                             allowClear={true}>
                         {
-                            positions.map((position, i) => {
-                                return <Option key={i} value={position}>{position}</Option>
+                            producersFinal.map((producer, i) => {
+                                return <Option key={i} value={producer}>{producer}</Option>
                             })
                         }
                     </Select>
                 </Col>
 
-                <Col span={8}>
+                <Col span={6} className={'filter_breadcrumb'}>
                     <Select style={{width: 240}}
-                            onChange={handleCuisineChange}
+                            onChange={handlescreenwriterChange}
                             allowClear={true}>
                         {
-                            cuisines.map((cuisine, i) => {
-                                return <Option key={i} value={cuisine}>{cuisine}</Option>
+                            screenwritersFinal.map((screenwriter, i) => {
+                                return <Option key={i} value={screenwriter}>{screenwriter}</Option>
                             })
                         }
                     </Select>
                 </Col>
 
-                <Col span={8}>
+                <Col span={6} className={'filter_breadcrumb'}>
                     <Select style={{width: 240}}
-                            onChange={handleDishChange}
+                            onChange={handleGenreChange}
                             allowClear={true}>
                         {
-                            dishes.map((dish, i) => {
-                                return <Option key={i} value={dish}>{dish}</Option>
+                            genresFinal.map((genre, i) => {
+                                return <Option key={i} value={genre}>{genre}</Option>
                             })
                         }
                     </Select>
                 </Col>
             </Row>
-
-            <Slider range={{ draggableTrack: true }}
-                    style={{width: 200}}
-                    defaultValue={[2, 10]}
-                    min={2}
-                    max={45}
-                    onChange={FilterChiefByWorkTime}/>
         </>
     )
 
     function updateSelectedFilters(filledName, newData) {
         const tempFilters = selectedFilters;
         tempFilters[filledName] = newData
-        tempFilters.filtersOn = !!(selectedFilters.position
-            || selectedFilters.cuisine
-            || selectedFilters.dish
-            || selectedFilters.experiense)
+        tempFilters.filtersOn = !!(selectedFilters.producer
+            || selectedFilters.screenwriter
+            || selectedFilters.genre)
         changeSelectedFilters(tempFilters);
         onFilterChange(selectedFilters);
     }
+    
 }
